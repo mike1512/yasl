@@ -1,0 +1,7 @@
+include 'yasl-common'
+include 'yasl-entities'
+include 'yasl-ear'
+include 'yasl-war'
+include 'yasl-rest'
+
+rootProject.name = 'yasl'

@@ -1,0 +1,31 @@
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+allprojects {
+	group = 'com.geiswinkler.yasl'
+	version = '0.1-SNAPSHOT'
+}
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'idea'
+	
+	sourceCompatibility = 1.7
+
+    if(it.name.endsWith('war')) {
+        apply plugin: 'war'
+
+        war {
+            version = ''
+        }
+    }
+
+    if(it.name.endsWith('ear')) {
+        apply plugin: 'ear'
+
+        ear {
+            version = ''
+        }
+    }
+}
