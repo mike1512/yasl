@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.httpcomponents:httpclient:4.2.6.redhat-3">
+    <CLASSES>
+      <root url="jar://E:/Users/mike/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.2.6.redhat-3/9ec809c41898252171d697acb0cd9b09f99f1a78/httpclient-4.2.6.redhat-3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://E:/Users/mike/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.2.6.redhat-3/607b96113c447e4901e7cf184a0da580012fb48d/httpclient-4.2.6.redhat-3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

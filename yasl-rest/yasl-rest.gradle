@@ -1,0 +1,16 @@
+description "The YASL RESTful service"
+
+dependencies {
+    compile project(':yasl-common')
+    compile project(':yasl-entities')
+    compile project(':yasl-service')
+
+    compile libraries.deltaspike_core
+    compile libraries.deltaspike_core_impl
+    compile libraries.deltaspike_jpa_module_api
+
+    compile "org.codehaus.jackson:jackson-xc:1.9.13"
+    compile "org.codehaus.jackson:jackson-jaxrs:1.9.13"
+
+    provided providedLibraries.resteasy_impl
+}

@@ -1,0 +1,67 @@
+apply plugin: 'io.spring.dependency-management'
+
+ext {
+	junitVersion='4.11'
+   	jbossVersion='6.3.2.GA'
+   	jsfVersion='2.2.8-02'
+   	deltaspikeVersion='1.2.1'
+   	
+    providedLibraries = [
+    	annotation_api : "org.jboss.spec.javax.annotation:jboss-annotations-api_1.1_spec",
+    	cdi_api : "javax.enterprise:cdi-api",
+    	ejb_api : "org.jboss.spec.javax.ejb:jboss-ejb-api_3.1_spec",
+    	el_api : "org.jboss.spec.javax.el:jboss-el-api_2.2_spec",
+      	hibernate_core : "org.hibernate:hibernate-core",
+      	hibernate_entityManager : "org.hibernate:hibernate-entitymanager",
+      	jpa_api : "org.hibernate.javax.persistence:hibernate-jpa-2.0-api",
+    	jsf_api : "com.sun.faces:jsf-api:${jsfVersion}",
+    	jsf_impl : "com.sun.faces:jsf-impl:${jsfVersion}",
+    	jta_api : "org.jboss.spec.javax.transaction:jboss-transaction-api_1.1_spec",
+    	log4j: "org.slf4j:slf4j-log4j12:1.7.10",
+    	resteasy_impl: 'org.jboss.resteasy:resteasy-jaxrs',
+    	servlet_api : "org.jboss.spec.javax.servlet:jboss-servlet-api_3.0_spec",
+    	slf4j_api : "org.slf4j:slf4j-api",
+ 	]
+	
+	libraries = [
+		commons_lang : "commons-lang:commons-lang:2.6",	
+		cdi_unit: 'org.jglue.cdi-unit:cdi-unit:3.1.1',
+		deltaspike_core: "org.apache.deltaspike.core:deltaspike-core-api:${deltaspikeVersion}",
+    	deltaspike_core_impl: "org.apache.deltaspike.core:deltaspike-core-impl:${deltaspikeVersion}",
+    	deltaspike_jsf_module_api: "org.apache.deltaspike.modules:deltaspike-jsf-module-api:${deltaspikeVersion}",
+    	deltaspike_jsf_module_impl: "org.apache.deltaspike.modules:deltaspike-jsf-module-impl:${deltaspikeVersion}",
+    	deltaspike_jpa_module_api: "org.apache.deltaspike.modules:deltaspike-jpa-module-api:${deltaspikeVersion}",
+    	deltaspike_jpa_module_impl: "org.apache.deltaspike.modules:deltaspike-jpa-module-impl:${deltaspikeVersion}",
+    	deltaspike_test_module_api: "org.apache.deltaspike.modules:deltaspike-test-control-module-api:${deltaspikeVersion}",
+    	deltaspike_test_module_impl: "org.apache.deltaspike.modules:deltaspike-test-control-module-impl:${deltaspikeVersion}",
+		deltaspike_test_module_weld: "org.apache.deltaspike.cdictrl:deltaspike-cdictrl-weld:${deltaspikeVersion}",
+		h2: "com.h2database:h2:1.4.185",
+    	junit: "junit:junit:${junitVersion}",
+    	primefaces: "org.primefaces:primefaces:5.1",
+		weld_se: "org.jboss.weld.se:weld-se-core:1.1.23.Final"
+    ]
+}
+
+dependencyManagement {
+     imports {
+          mavenBom "org.jboss.bom.eap:jboss-javaee-6.0-with-hibernate:6.2.0-redhat-1"
+          mavenBom "org.jboss.bom:eap6-supported-artifacts:6.3.2.GA"
+     }
+}
+
+configurations { provided }
+
+sourceSets {
+		main.compileClasspath += configurations.provided
+		test.compileClasspath += configurations.provided
+		test.runtimeClasspath += configurations.provided
+}
+
+dependencies {
+	provided providedLibraries.ejb_api
+	provided providedLibraries.cdi_api
+	provided providedLibraries.jpa_api
+	provided providedLibraries.slf4j_api
+	
+	testCompile libraries.junit
+}

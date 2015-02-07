@@ -1,0 +1,88 @@
+//Generate the jpa metamodel
+configurations {
+	jpaModelgen
+}
+
+dependencies {
+	jpaModelgen 'org.hibernate:hibernate-jpamodelgen'
+	jpaModelgen 'net.karneim:pojobuilder:3.3.2'
+}
+
+ext {
+	generatedMetamodelSrcDir = 'src/main/generated/jpa_metamodel'
+}
+
+//Add a separate source set for the generated code so that the source is not analyzed in code analysis.
+//We need the compiled entity classes from the main source set for that
+sourceSets {
+	main {
+		compileClasspath += configurations.jpaModelgen
+	}
+	generated {
+		java {
+			srcDir file(generatedMetamodelSrcDir)
+		}
+		compileClasspath += main.output
+		compileClasspath += configurations.compile
+		compileClasspath += configurations.provided
+	}
+}
+
+task generateJpaMetamodel(type: JavaCompile, description: 'Hibernate JPA 2 Static-Metamodel Generator') {
+  source = sourceSets.main.java
+  classpath = configurations.compile + configurations.jpaModelgen + configurations.provided
+  options.compilerArgs = [
+    "-proc:only",
+  ]
+  destinationDir = file(generatedMetamodelSrcDir)
+}
+
+compileGeneratedJava.options.compilerArgs += ["-proc:none"]
+compileJava.options.compilerArgs += ["-proc:none"]
+
+jar { from sourceSets.generated.output }
+
+compileGeneratedJava.dependsOn generateJpaMetamodel
+compileGeneratedJava.dependsOn compileJava
+
+//Update eclipse setting to do jpa metamodel generation on entity change
+plugins.withType(EclipsePlugin) {
+	eclipseClasspath.dependsOn generateJpaMetamodel
+
+	eclipse {
+		classpath {
+			plusConfigurations += [configurations.jpaModelgen]
+		}		
+	  	jdt.file.withProperties { 
+	    	it['org.eclipse.jdt.core.compiler.processAnnotations'] = 'enabled'
+	  	}
+	}
+	
+	tasks.eclipseJdt {
+	  doFirst {
+	    def aptPrefs = 
+	      file(".settings/org.eclipse.jdt.apt.core.prefs")
+	    aptPrefs.parentFile.mkdirs()
+	
+	    aptPrefs.text = """\
+	    eclipse.preferences.version=1
+	    org.eclipse.jdt.apt.aptEnabled=true
+	    org.eclipse.jdt.apt.genSrcDir=${generatedMetamodelSrcDir}
+	    org.eclipse.jdt.apt.reconcileEnabled=true
+	    """.stripIndent()
+	
+	    file('.factorypath').withWriter {
+	      new groovy.xml.MarkupBuilder(it).'factorypath' {
+	        project.configurations.jpaModelgen.each { dep->
+	          factorypathentry(
+	            kind:'EXTJAR',
+	            id:dep.absolutePath,
+	            enabled:true,
+	            runInBatchMode:false
+	          )
+	        }
+	      }
+	    }
+	  }
+	}
+}

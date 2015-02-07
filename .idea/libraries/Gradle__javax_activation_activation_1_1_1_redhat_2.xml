@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: javax.activation:activation:1.1.1-redhat-2">
+    <CLASSES>
+      <root url="jar://E:/Users/mike/.gradle/caches/modules-2/files-2.1/javax.activation/activation/1.1.1-redhat-2/3065572799293911c310132b74f384c2e57ee933/activation-1.1.1-redhat-2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://E:/Users/mike/.gradle/caches/modules-2/files-2.1/javax.activation/activation/1.1.1-redhat-2/198238a5be90cfb58da3d58e90b37998aa881b28/activation-1.1.1-redhat-2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

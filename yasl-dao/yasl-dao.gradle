@@ -1,0 +1,9 @@
+description = 'The YASL dao'
+
+dependencies {
+    compile project(':yasl-common')
+    compile project(':yasl-entities')
+    compile libraries.commons_lang
+
+    provided providedLibraries.hibernate_core
+}

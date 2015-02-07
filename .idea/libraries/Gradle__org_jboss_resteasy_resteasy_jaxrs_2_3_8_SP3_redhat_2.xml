@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jboss.resteasy:resteasy-jaxrs:2.3.8.SP3-redhat-2">
+    <CLASSES>
+      <root url="jar://E:/Users/mike/.gradle/caches/modules-2/files-2.1/org.jboss.resteasy/resteasy-jaxrs/2.3.8.SP3-redhat-2/821fa22aff2ca84ba13eee959eda10acfb403ec2/resteasy-jaxrs-2.3.8.SP3-redhat-2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://E:/Users/mike/.gradle/caches/modules-2/files-2.1/org.jboss.resteasy/resteasy-jaxrs/2.3.8.SP3-redhat-2/81e71512142a328a189903d5204d2db9e027e728/resteasy-jaxrs-2.3.8.SP3-redhat-2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

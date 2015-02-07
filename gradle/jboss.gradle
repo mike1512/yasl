@@ -1,0 +1,19 @@
+task jbossStart() {
+	doLast {
+	def processBuilder=new ProcessBuilder([
+		'cmd',
+		'/c',
+		'start standalone.bat'
+	])
+	processBuilder.redirectErrorStream(true)
+	processBuilder.directory(new File("$jbossHome/bin"))
+	def process = processBuilder.start()
+	process.in.close()
+	process.out.close()
+	process.err.close()
+}
+}
+
+jbossStart.mustRunAfter('deployExploded')
+
+task jbossClean(type:Delete) { delete "$jbossHome/standalone/tmp/" }

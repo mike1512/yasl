@@ -1,0 +1,10 @@
+description "The YASL serive"
+
+dependencies {
+    compile project(':yasl-common')
+    compile project(':yasl-entities')
+    compile project(':yasl-dao')
+
+    compile libraries.commons_lang
+    compile libraries.deltaspike_core
+}

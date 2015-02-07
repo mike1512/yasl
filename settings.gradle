@@ -1,7 +1,17 @@
 include 'yasl-common'
 include 'yasl-entities'
+include 'yasl-dao'
 include 'yasl-ear'
 include 'yasl-war'
 include 'yasl-rest'
+include 'yasl-service'
 
 rootProject.name = 'yasl'
+
+rootProject.children.each {project ->
+    String projectDirName = "${project.name}"
+    project.projectDir = new File(settingsDir, projectDirName)
+    project.buildFileName = "${project.name}.gradle"
+    assert project.projectDir.isDirectory()
+    assert project.buildFile.isFile()
+}

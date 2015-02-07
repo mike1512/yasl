@@ -1,0 +1,105 @@
+description "The YASL ear"
+
+dependencies {
+    deploy project(path:':yasl-war', configuration:'archives')
+
+    earlib project(':yasl-common')
+    earlib project(':yasl-entities')
+    earlib project(':yasl-service')
+    earlib project(':yasl-rest')
+    earlib libraries.deltaspike_core
+    earlib libraries.deltaspike_core_impl
+    earlib libraries.deltaspike_jpa_module_api
+    earlib libraries.deltaspike_jpa_module_impl
+
+    configurations.deploy.dependencies.each {
+        if(it instanceof ProjectDependency && it.configuration != 'archives') {
+            earlib project(path: it.dependencyProject.path, configuration: 'runtime')
+        }
+    }
+}
+
+configurations.provided.incoming.dependencies.whenObjectAdded { dep ->
+    configurations.earlib {
+        it.exclude group:dep.group, module:dep.name
+    }
+}
+
+def ejbJars = []
+configurations.deploy.dependencies.each {
+    if (it instanceof ProjectDependency) {
+        ejbJars.add(it.dependencyProject.jar.archiveName)
+    }
+}
+
+ear {
+    lib {
+        rootSpec.eachFile {
+            if(ejbJars.contains(it.relativePath.lastName) && it.relativePath.toString().contains("lib/")) {
+                println "Exclude ${it.relativePath} from ear lib, because it's an ejb jar"
+                it.exclude()
+            }
+        }
+    }
+
+    def version = project.hasProperty('buildOriginator') ? buildOriginator : "unspecified"
+    version += ", rev"
+    version += project.hasProperty('buildRevision') ? buildRevision : "unknown"
+
+    deploymentDescriptor {
+        applicationName = "yasl-ear"
+        webModule("yasl-war.war", '/yasl')
+        withXml { provider ->
+            def envEntry = provider.asNode().appendNode("env-entry")
+            envEntry.appendNode("description", "Version Information")
+            envEntry.appendNode("env-entry-name", "Version Information")
+            envEntry.appendNode("env-entry-type", "java.lang.String")
+            envEntry.appendNode("env-entry-value", "${version}")
+        }
+    }
+    eachFile {
+        if(it.name == 'jboss-deployment-structure.xml') {
+            println "Expanding projectVersion to ${project.version}"
+            it.expand('projectVersion': "${project.version}")
+        }
+    }
+}
+
+def webProjects = [project(":yasl-war")]
+
+task syncExplodedEar(type: Sync) {
+    into "$deployDirectory/$ear.archiveName"
+    with ear
+    exclude("*.war")
+    webProjects.each { wP ->
+        into (wP.war.archiveName) {
+            with wP.war
+        }
+    }
+}
+
+task deployExplodedEar(dependsOn: syncExplodedEar) << {
+    def marker = file("$deployDirectory/$ear.archiveName"+".dodeploy");
+    if(!marker.exists()) {
+        marker.createNewFile();
+    }
+}
+
+task hotDeployWebContent() {}
+
+webProjects.each { webProject ->
+    def taskName = "hotDeploy"+webProject.name.replace("-","")
+    task "$taskName" (type: Copy) {
+        destinationDir = file("$deployDirectory/$ear.archiveName")
+        into (webProject.war.archiveName) {
+            with webProject.war
+            exclude('**/web.xml','**/*.jar')
+        }
+    }
+    hotDeployWebContent.dependsOn("$taskName")
+}
+
+
+task undeploy(type: Delete) {
+    delete "$deployDirectory/$ear.archiveName"
+}

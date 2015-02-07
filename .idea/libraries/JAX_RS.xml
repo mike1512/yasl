@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="JAX-RS" type="JAX-RS">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/yasl-rest/lib/javax.ws.rs-api-2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

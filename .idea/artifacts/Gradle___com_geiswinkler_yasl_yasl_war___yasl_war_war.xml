@@ -11,6 +11,14 @@
           <element id="module-output" name="yasl-war" />
           <element id="dir-copy" path="$PROJECT_DIR$/yasl-war/build/resources/main" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Gradle: commons-lang:commons-lang:2.6" />
+          <element id="library" level="project" name="Gradle: org.primefaces:primefaces:5.1" />
+          <element id="library" level="project" name="Gradle: org.apache.deltaspike.modules:deltaspike-jsf-module-api:1.2.1" />
+          <element id="library" level="project" name="Gradle: org.apache.deltaspike.modules:deltaspike-jsf-module-impl:1.2.1" />
+          <element id="library" level="project" name="Gradle: org.apache.deltaspike.modules:deltaspike-security-module-api:1.2.1" />
+          <element id="library" level="project" name="Gradle: org.apache.deltaspike.modules:deltaspike-security-module-impl:1.2.1" />
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/build/classes/artifacts/yasl-war/exploded/yasl-war.war/META-INF/MANIFEST.MF" />

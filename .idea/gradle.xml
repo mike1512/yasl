@@ -11,11 +11,15 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/yasl-common" />
+            <option value="$PROJECT_DIR$/yasl-dao" />
             <option value="$PROJECT_DIR$/yasl-ear" />
             <option value="$PROJECT_DIR$/yasl-entities" />
+            <option value="$PROJECT_DIR$/yasl-rest" />
+            <option value="$PROJECT_DIR$/yasl-service" />
             <option value="$PROJECT_DIR$/yasl-war" />
           </set>
         </option>
+        <option name="useAutoImport" value="true" />
       </GradleProjectSettings>
     </option>
   </component>

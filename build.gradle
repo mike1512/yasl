@@ -1,17 +1,39 @@
-repositories {
-	mavenLocal()
-	mavenCentral()
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://maven.repository.redhat.com/techpreview/all/"
+        }
+    }
+
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:0.2.1.RELEASE"
+    }
 }
+
+ext {
+    deployDirectory = "$jbossHome/standalone/deployments"
+    gradleScriptDir = "${rootProject.projectDir}/gradle"
+}
+
 allprojects {
 	group = 'com.geiswinkler.yasl'
 	version = '0.1-SNAPSHOT'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url "https://maven.repository.redhat.com/techpreview/all/"
+        }
+    }
 }
 
 subprojects {
 	apply plugin: 'java'
 	apply plugin: 'idea'
-	
-	sourceCompatibility = 1.7
+
+    apply from: "${gradleScriptDir}/dependencyManagement.gradle"
 
     if(it.name.endsWith('war')) {
         apply plugin: 'war'
@@ -29,3 +51,9 @@ subprojects {
         }
     }
 }
+apply from: "${gradleScriptDir}/jboss.gradle"
+apply from: "${gradleScriptDir}/idea.gradle"
+
+task deployExploded(dependsOn: ':yasl-ear:deployExplodedEar') {}
+
+task deployWebContent(dependsOn: ':yasl-ear:hotDeployWebContent') {}

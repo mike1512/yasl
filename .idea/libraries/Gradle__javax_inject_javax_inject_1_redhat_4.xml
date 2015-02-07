@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: javax.inject:javax.inject:1.redhat-4">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/javax/inject/javax.inject/1.redhat-4/javax.inject-1.redhat-4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

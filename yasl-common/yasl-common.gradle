@@ -1,0 +1,7 @@
+description "The YASL common"
+
+dependencies {
+    compile project(':yasl-entities')
+
+    compile libraries.deltaspike_core
+}

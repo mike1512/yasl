@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jboss.spec.javax.servlet:jboss-servlet-api_3.0_spec:1.0.2.Final-redhat-1">
+    <CLASSES>
+      <root url="jar://E:/Users/mike/.gradle/caches/modules-2/files-2.1/org.jboss.spec.javax.servlet/jboss-servlet-api_3.0_spec/1.0.2.Final-redhat-1/898f2276d7eff4bce5e40e22e979b084124e0103/jboss-servlet-api_3.0_spec-1.0.2.Final-redhat-1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://E:/Users/mike/.gradle/caches/modules-2/files-2.1/org.jboss.spec.javax.servlet/jboss-servlet-api_3.0_spec/1.0.2.Final-redhat-1/11a4705f4cf632819a23c44c9cab66f2368b4c2c/jboss-servlet-api_3.0_spec-1.0.2.Final-redhat-1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

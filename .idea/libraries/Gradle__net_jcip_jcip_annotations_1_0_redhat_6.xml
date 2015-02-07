@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: net.jcip:jcip-annotations:1.0.redhat-6">
+    <CLASSES>
+      <root url="jar://E:/Users/mike/.gradle/caches/modules-2/files-2.1/net.jcip/jcip-annotations/1.0.redhat-6/8d4536f5bf02ef22fc5971192434a98dd5e951b3/jcip-annotations-1.0.redhat-6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://E:/Users/mike/.gradle/caches/modules-2/files-2.1/net.jcip/jcip-annotations/1.0.redhat-6/259fbb717b135242de9c8fbeb78f370115adad77/jcip-annotations-1.0.redhat-6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
